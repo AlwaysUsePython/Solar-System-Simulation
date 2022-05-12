@@ -54,12 +54,12 @@ class Asteroid:
 
 
 class Planet:
-    def __init__(self, mass, distance, color):
+    def __init__(self, mass, distance, color, angle):
         self.mass = mass
         self.distance = distance
         self.x = 375 + distance
         self.y = 375
-        self.angle = 0
+        self.angle = angle
         self.color = color
 
     def move(self):
@@ -76,8 +76,8 @@ class Simulation:
         self.asteroids = []
         self.year = 0
 
-    def addPlanet(self, mass, distance, color):
-        self.planets.append(Planet(mass, distance, color))
+    def addPlanet(self, mass, distance, color, angle):
+        self.planets.append(Planet(mass, distance, color, angle))
 
     def addAsteroid(self, x, y):
         dx = random.random()
@@ -128,21 +128,41 @@ class Simulation:
 def simulate():
     screen = pygame.display.set_mode((750, 750))
 
-    simulation = Simulation()
+    simulation: Simulation = Simulation()
 
-    simulation.addPlanet(0.5, 60, (100, 100, 100))
-    simulation.addPlanet(1, 70, (100, 255, 150))
-    simulation.addPlanet(1, 90, (100, 150, 255))
-    simulation.addPlanet(0.7, 120, (255, 100, 100))
-    simulation.addPlanet(2, 160, (150, 150, 100))
-    simulation.addPlanet(4, 200, (200, 150, 150))
-    simulation.addPlanet(3, 240, (100, 100, 255))
-    simulation.addPlanet(2, 280, (100, 255, 200))
-    simulation.addPlanet(4, 300, (0, 255, 0))
+    # Mercury
+    simulation.addPlanet(0.5, 60, (100, 100, 100), 10)
+
+    # Venus
+    simulation.addPlanet(1, 70, (100, 255, 150), 275)
+
+    # Earth
+    simulation.addPlanet(1, 90, (100, 150, 255), 190)
+
+    # Mars
+    simulation.addPlanet(0.7, 120, (255, 100, 100), 0)
+
+    # Jupiter
+    simulation.addPlanet(4, 160, (200, 150, 150), 300)
+
+    # Saturn
+    simulation.addPlanet(2, 200, (150, 150, 100), 120)
+
+    # Uranus
+    simulation.addPlanet(3, 240, (100, 100, 255), 60)
+
+    # Neptune
+    simulation.addPlanet(2, 280, (100, 255, 200), 100)
+
+    # Planet 9?!!?!!! (version 1)
+    #simulation.addPlanet(4, 300, (0, 255, 0))
+
+    # Planet 9?!!?!!! (version 2)
+    #simulation.addPlanet(6, 350, (0, 255, 0), 90)
 
     yearAvgs = []
 
-    for i in range(500):
+    for i in range(5000):
         simulation.addAsteroid(random.randint(1, 750), random.randint(1, 750))
 
     running = True
